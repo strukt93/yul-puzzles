@@ -10,10 +10,12 @@ contract ReadFromMapping {
 
     function main(uint256 index) external view returns (uint256) {
         assembly {
-            // your code here
-            // read the value at the `index` in the mapping `readMe`
-            // and return it
-            // Hint: https://www.rareskills.io/post/solidity-dynamic
+            let ptr := mload(0x40) // Load the free memory pointer
+            mstore(ptr, index) // Store the index
+            mstore(add(ptr, 0x20), readMe.slot) // Store the mapping slot
+            let loc := keccak256(ptr, 0x40) // keccak256(index ++ mapping)
+            mstore(0x00, sload(loc)) // Load from the storage
+            return(0x00, 0x20) // Return the value
         }
     }
 }
