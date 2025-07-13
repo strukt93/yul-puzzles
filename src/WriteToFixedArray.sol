@@ -6,8 +6,8 @@ contract WriteToFixedArray {
 
     function main(uint256[5] memory x) external {
         assembly {
-            let loc := 0x24
-            for { let i := 0x00 } lt(i, 0x05) { i := add(i, 0x01) } {
+            let loc := 0x4
+            for { let i := 0 } lt(i, 5) { i := add(i, 1) } {
                 sstore(add(writeHere.slot, i), calldataload(loc))
                 loc := add(loc, 0x20)
             }
