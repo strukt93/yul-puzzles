@@ -5,7 +5,7 @@ contract SimpleRevert {
 
   function main() external pure {
       assembly {
-          revert(0,0)
+          revert(0,0) //Reverts with nothing loaded from memory
       }
   }
 }

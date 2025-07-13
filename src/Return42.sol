@@ -5,14 +5,8 @@ contract Return42 {
 
   function main() external pure returns (uint256) {
       assembly {
-          // your code here
-          // return 42 in decimal
-          // hint: return works the same way as revert
-          // simply replace `revert(start, len)` with
-          // `return(start, len)`
-          // hint: you need to return 32 bytes of size
-          // even though the returned value is 42
-          // https://www.rareskills.io/post/assembly-revert
+          mstore(0x00, 42) //Store 42 (decimal) in the first memory slot
+          return(0x00, 0x20) //Return the first memory slot's 32 bytes
       }
   }
 }
