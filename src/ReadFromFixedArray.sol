@@ -10,11 +10,8 @@ contract ReadFromFixedArray {
 
     function main(uint256 index) external view returns (uint256) {
         assembly {
-            // your code here
-            // read the value at the `index` in the fixed array `readMe`
-            // and return it
-            // Assume `index` is <= to the length of readMe
-            // Hint: https://www.rareskills.io/post/solidity-dynamic
+            mstore(0x00, sload(add(readMe.slot, index))) // Read the store at the readMe variable slot + index
+            return(0x00, 0x20) // Return it
         }
     }
 }

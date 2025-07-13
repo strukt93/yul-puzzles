@@ -10,10 +10,8 @@ contract ReadFromStorage {
 
     function main() external view returns (uint256) {
         assembly {
-            // your code here
-            // read the value in the storage variable `readMe`
-            // and return it
-            // Hint: use sload opcode
+            mstore(0x00, sload(readMe.slot)) // Read the storage at the slot of the readMe variable
+            return(0x00, 0x20) // Return the value
         }
     }
 }
