@@ -16,9 +16,10 @@ contract ReadFromPacked64 {
 
     function main() external view returns (uint256) {
         assembly {
-            // your code here
-            // unpack and read data from the storage variable `readMe` of type uint64
-            // then return it
+            let packed := sload(0x00)
+            packed := shr(128, packed)
+            mstore(0x00, and(packed, 18446744073709551615)) //Decimal representation of 0000000000000000000000000000000000000000000000000FFFFFFFFFFFFFFFF
+            return(0x00, 0x20)
         }
     }
 }
