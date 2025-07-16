@@ -12,9 +12,10 @@ contract ReadFromPacked128 {
 
     function main() external view returns (uint256) {
         assembly {
-            // your code here
-            // unpack and read data from the storage variable `readMe` of type uint128
-            // then return it
+            let packed := sload(readMe.slot)
+            let shifted := shr(128, packed)
+            mstore(0x00, shifted)
+            return(0x00, 0x20)
         }
     }
 }

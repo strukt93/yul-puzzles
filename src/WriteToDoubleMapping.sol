@@ -6,9 +6,13 @@ contract WriteToDoubleMapping {
 
     function main(address user, address token, uint256 value) external {
         assembly {
-            // your code here
-            // set the `value` for a `user` and a `token`
-            // Hint: https://www.rareskills.io/post/solidity-dynamic
+            let ptr := mload(0x40) // Load the free memory pointer
+            mstore(ptr, user) // Store the index
+            mstore(add(ptr, 0x20), balances.slot) // Store the mapping slot
+            mstore(add(ptr, 0x20), keccak256(ptr, 0x40)) // keccak256(user ++ mappingSlot) and store it at ptr + 0x20
+            mstore(ptr, token) // Store token at ptr
+            let loc := keccak256(ptr, 0x40) // keccak256(token ++ prevResult)
+            sstore(loc, value) // Write to storage
         }
     }
 }
