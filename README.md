@@ -61,7 +61,7 @@ Go through the puzzles sequentially
 44. [AnonymonusEventWithoutData](./src/AnonymonusEventWithoutData.sol) (_solved_)
 45. [AnonymonusEventWithData](./src/AnonymonusEventWithData.sol) (_solved_)
 46. [AnonymonusEventWithIndexedData](./src/AnonymonusEventWithIndexedData.sol) (_solved_)
-47. [AnonymonusEventWithComplexData](./src/AnonymonusEventWithComplexData.sol) 
+47. [AnonymonusEventWithComplexData](./src/AnonymonusEventWithComplexData.sol) (_UNSOLVED_)
 48. [EventWithComplexData](./src/EventWithComplexData.sol) 
 49. [BatchEvents](./src/BatchEvents.sol) 
 50. [CalculatorInFallback](./src/CalculatorInFallback.sol)
