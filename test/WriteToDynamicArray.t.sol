@@ -22,6 +22,7 @@ contract WriteToDynamicArrayTest is Test {
         a[4] = z;
 
         c.main(a);
+        console.log(c.getter().length);
         assertEq(a[i], c.getter()[i]);
     }
 }

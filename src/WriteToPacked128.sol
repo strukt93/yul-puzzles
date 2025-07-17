@@ -7,11 +7,11 @@ contract WriteToPacked128 {
 
     function main(uint256 v) external {
         assembly {
-            // your code here
-            // change the value of `writeHere` storage variable to `v`
-            // be careful not to alter the value of `someValue` variable
-            // Hint: storage slots are arranged sequentially. Determine the storage slot of `writeHere`
-            // and use `sstore` to modify only the `writeHere` variable.
+            let slot := writeHere.slot // Get the slot we want to write to
+            let initial := sload(slot) // Get the value at the slot (the full, packed value)
+            initial := shr(128, initial) // Shift right 128 bits to zero out the lower 16 bytes
+            initial := shl(128, initial) // Shift left 128 bits to get `someValue` back to the higher 16 bytes
+            sstore(slot, or(initial, v)) // Store the or() output of our values
         }
     }
 }

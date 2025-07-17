@@ -6,10 +6,11 @@ contract PopFromDynamicArray {
 
     function main() external {
         assembly {
-            // your code here
-            // pop the last element from the dynamic array `popFromMe`
-            // dont forget to clean the popped element's slot.
-            // Hint: https://www.rareskills.io/post/solidity-dynamic
+            let length := sload(0x00) // popFromMe's slot is 0, we load its length from there
+            let newLength := sub(length, 1) 
+            sstore(0x00, newLength) // We overwrite the length and decrement it by 1 since we pop a single item from the array
+            let slot := keccak256(0x00, 0x20)  // We hash the slot so we know where the first actual item is
+            sstore(add(slot, newLength), 0x00) // We then zero out the previous last slot of the array
         }
     }
 

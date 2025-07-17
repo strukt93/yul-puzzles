@@ -6,9 +6,10 @@ contract PushToDynamicArray {
 
     function main(uint256 newValue) external {
         assembly {
-            mstore(0x00, pushToMe.slot)
-            let loc := keccak256(0x00, 0x20)
-            sstore(add(loc, 6), newValue)
+            let length := sload(0x00) // pushToMe's slot is 0, we load its length from there
+            sstore(0x00, add(length, 1)) // We overwrite the length and increment it by 1 since we push a single item to the array
+            let slot := keccak256(0x00, 0x20) // We hash the slot so we know where the first actual item is
+            sstore(add(slot, length), newValue) // We then store newValue at the first item's slot + the array length
         }
     }
 

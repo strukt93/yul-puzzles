@@ -13,6 +13,7 @@ contract ReturnOppositeBoolTest is Test {
 
     function test_ReturnOppositeBool(bool x) public {
         bool r = c.main(x);
+        console.log(x,r);
         assertEq(r, !x);
     }
 }

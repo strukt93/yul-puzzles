@@ -9,9 +9,11 @@ contract WriteToPacked64 {
 
     function main(uint256 v) external {
         assembly {
-            // your code here
-            // change the value of `writeHere` storage variable to `v`
-            // be careful not to alter the value of `someValue` variable
+            let slot := writeHere.slot // Get the slot we want to write to
+            let initial := sload(slot) // Get the value at the slot (the full, packed value)
+            let cleared := and(initial, 0xffffffffffffffffffffffffffffffff0000000000000000ffffffffffffffff) // Clear the 64 bits for writeHere
+            let newV := shl(64, v) // Shift v 64 bits to the left so it aligns with the position of writeHere
+            sstore(slot, or(cleared, newV)) // Or() the stuff and store it
         }
     }
 }
