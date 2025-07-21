@@ -5,12 +5,7 @@ contract SendEther {
 
     function main(address payable to, uint256 amount) external payable {
         assembly {
-            // your code here
-            // send `amount` of ether to `to`
-            // assume `amount` is less than or equal to the contract balance
-            // assume `amount` is in wei
-            // hint: use the `call` opcode: https://docs.soliditylang.org/en/latest/yul.html#evm-dialect
-            // hint: use the `gas` opcode to get the gas left
+            pop(call(gas(), to, amount, 0, 0, 0, 0)) // pop() is just so the value is discarded and we get no errors
         }
     }
 }

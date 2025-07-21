@@ -5,11 +5,7 @@ contract SendAllEther {
 
     function main(address payable to) external payable {
         assembly {
-            // your code here
-            // send the entire contract balance to `to`
-            // hint: use the `call` opcode: https://docs.soliditylang.org/en/latest/yul.html#evm-dialect
-            // hint: use the `selfbalance()` opcode
-
+            pop(call(gas(), to, selfbalance(), 0, 0, 0, 0)) // pop() is just so the value is discarded and we get no errors
         }
     }
 }
