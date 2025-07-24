@@ -9,7 +9,10 @@ contract CreateSimple {
             // return the address of the contract
             // hint: use the `create` opcode
             // hint: the bytecode is already in memory
-
+            let size := mload(deploymentBytecode) // Get the size of the bytecode
+            let contractAddress := create(0, add(deploymentBytecode, 0x20), size) // Create the contract and save the address
+            mstore(0x00, contractAddress) // Store the address
+            return(0x00, 0x20) // Return the address
         }
     }
 }

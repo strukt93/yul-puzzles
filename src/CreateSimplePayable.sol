@@ -11,6 +11,11 @@ contract CreateSimplePayable {
             // do this as part of create, don't transfer it after
             // hint: use the `create` opcode
             // hint: the bytecode is already in memory
+            let size := mload(deploymentBytecode) // Get the bytecode size
+            let offset := add(deploymentBytecode, 0x20) // Get the offset where the bytecode actually begins 
+            let contractAddress := create(callvalue(), offset, size) // Deploy the contract, sending msg.value to the constructor
+            mstore(0x00, contractAddress) // Store the address
+            return(0x00, 0x20) // Return the address
         }
     }
 }

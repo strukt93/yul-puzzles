@@ -11,6 +11,11 @@ contract BalanceOf {
             // hint: balanceOf has function selector 0x70a08231 and signature "balanceOf(address)"
             // hint: since this is a view function, you should use staticcall
             // hint: use `returndatacopy` to copy the return data to the memory
+            mstore(0x00, 0x70a08231) // Store the function selector
+            mstore(0x20, address()) // Store address(this)
+            pop(staticcall(gas(), token, 28, 36, 0, 0)) // Call the token's balanceOf function
+            returndatacopy(0x00, 0x00, returndatasize()) // Copy the return data from the stack to the memory
+            return(0x00, 0x20) // Return the copied return data
        }
     }
 }
