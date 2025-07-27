@@ -23,7 +23,7 @@ Go through the puzzles sequentially
 6. [RevertWithPanic](./src/RevertWithPanic.sol) (_solved_)
 7. [Double](./src/Double.sol) (_solved_)
 8. [Calculator](./src/Calculator.sol) (_solved_)
-9. [DoubleOrNothing](./src/DoubleOrNothing.sol) (_solution fails_)
+9. [DoubleOrNothing](./src/DoubleOrNothing.sol) (_solved_)
 10. [MaxOfTwoValues](./src/MaxOfTwoValues.sol) (_solved_)
 11. [IsPrime](./src/IsPrime.sol) (_solved_)
 12. [CalldataLength](./src/CalldataLength.sol) (_solved_)
