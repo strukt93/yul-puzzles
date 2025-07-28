@@ -7,12 +7,14 @@ contract PaymentSplitter {
         assembly {
             let len := recipients.length
             let amt := div(selfbalance(), len)
-            let pos := 16
+            //let offset := recipients.offset //Where the list of recipients actually starts in calldata
+            let offset := 0x44
             for { let i := 0 } lt(i, len) { i := add(i, 1) } {
-                let addr := calldataload(pos)
+                let addr := calldataload(offset)
                 pop(call(gas(), addr, amt, 0, 0, 0, 0))
-                pos := add(pos, 0x20)
+                offset := add(offset, 0x20)
             }
         }
+        console.logBytes(msg.data);
     }
 }
