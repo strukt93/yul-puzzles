@@ -5,11 +5,13 @@ contract AbsoluteValue{
 
   function main(int256 x) external pure returns (uint256) {
       assembly {
-          // your code here
-          // return the absolute value of x
-          // hint: use signed comparisons
-          // hint: https://www.rareskills.io/post/signed-int-solidity
-
+        let abs := x
+        let negative_one := 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        if slt(x, 0) {
+          abs := sdiv(x, negative_one)
+        }
+        mstore(0x00, abs)
+        return(0x00, 0x20)
       }
   }
 }

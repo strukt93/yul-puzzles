@@ -5,6 +5,16 @@ contract Log2 {
 
     function main(uint256 x) external pure returns (uint256) {
         assembly {
+            if iszero(x){
+                revert(0,0)
+            }
+            for {let i := 0xff} gt(i, 0x00) {i := sub(i, 1)} {
+                let res := and(x, shl(i, 0x01))
+                if res {
+                    mstore(0x00, i)
+                    return(0x00, 0x20)
+                }
+            }
             // your code here
             // return log2 of x rounded down
             // revert if x is 0

@@ -15,6 +15,5 @@ contract PaymentSplitter {
                 offset := add(offset, 0x20)
             }
         }
-        console.logBytes(msg.data);
     }
 }
